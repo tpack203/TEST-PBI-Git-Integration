@@ -1,0 +1,38 @@
+table period
+	lineageTag: ddd71843-db6b-45ea-be4f-fff181c37042
+
+	column Date
+		formatString: General Date
+		lineageTag: 36e51a5a-c25f-4758-96a4-e827cf659c68
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		lineageTag: 8a68167a-c080-49f6-a258-331d4f2ac702
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Period]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition period = calculated
+		mode: import
+		source = ```
+				UNION(
+				    ADDCOLUMNS(
+				        CALENDAR( DATE(YEAR(TODAY()), 01, 01), TODAY() ), 
+				        "Period", "YTD"
+				    ), 
+				    ADDCOLUMNS(
+				        CALENDAR( MIN(_date_table[Date]), MAX(_date_table[Date]) ), 
+				        "Period", "All Dates"
+				    )
+				
+				)
+				```
+
+	annotation PBI_Id = 845fba2d5d174c93898064c7c7bcb227
+

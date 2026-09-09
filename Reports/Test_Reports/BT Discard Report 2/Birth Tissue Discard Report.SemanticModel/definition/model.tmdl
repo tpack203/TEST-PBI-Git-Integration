@@ -1,0 +1,24 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["_data","_date_table","_measures"]
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table _data
+ref table _date_table
+ref table _measures
+ref table 'Rate vs Perct. of Total'
+ref table parm_dates
+ref table parm_matrix_measures
+ref table period
+
+ref cultureInfo en-US
+

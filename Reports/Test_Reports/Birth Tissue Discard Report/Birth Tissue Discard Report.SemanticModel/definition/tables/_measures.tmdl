@@ -1,0 +1,89 @@
+table _measures
+	lineageTag: 9aba97a4-51b2-4727-b387-302d86aa30d9
+
+	measure count_discards =
+			CALCULATE(
+						COUNTROWS(_data),
+						_data[DON1MH-ACCEPT] = "N"
+					)
+		formatString: 0
+		lineageTag: 6d89f437-2551-4f23-a4af-902a5b2eabf9
+
+	measure count_donors = ```
+			CALCULATE(
+			    COUNTROWS(_data), 
+			    USERELATIONSHIP(_date_table[Date], _data[DON1MH-DATED-ADD]),
+			    ALL(_data[DiscardReason])
+			)
+			```
+		formatString: 0
+		lineageTag: 9a35d9bf-1a3d-4af9-bf8f-3c0537940057
+
+	measure rate_discards = DIVIDE([count_discards], [count_donors])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 538ae453-dab3-4c76-a21f-1c14b855bbd9
+
+	measure blank_ = 0
+		formatString: 0
+		lineageTag: b4bd9571-6769-4e99-9342-cce5d77ce1ef
+
+	measure rate_discard_label = ```
+			
+			
+			VAR Site     = SELECTEDVALUE ( _data[Branch] )
+			VAR SelParam = SELECTEDVALUE ( 'Rate vs Perct. of Total'[Rate vs Perct. of Total r Order] )   // 0 or 1
+			
+			-- Pick the correct measure value based on the parameter
+			VAR MeasureValue =
+			    SWITCH (
+			        SelParam,
+			        1,  _measures[percent_of_total_discards],   // % of total
+			        0, _measures[rate_discards],               // discard rate
+			        BLANK()
+			    )
+			
+			-- Format it exactly like you had for the rate
+			VAR Formatted =
+			    FORMAT ( MeasureValue, "0.0%" )
+			
+			RETURN
+			    Site & " | " & Formatted
+			
+			```
+		lineageTag: e1811b4b-3f08-45be-ba08-a1c94270123f
+
+	measure percent_of_total_discards = DIVIDE([count_discards], CALCULATE([count_discards], ALL()))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 7db15088-b324-45d4-b8ec-a3e9a28ce87d
+
+	measure dynamic_matrix_measure = ```
+			
+			VAR _SelectedMeasure = SELECTEDVALUE(parm_matrix_measures[parmmatrixmeasures Fields])
+			VAR _SelectedDate = SELECTEDVALUE(parm_dates[parm_dates Fields])
+			VAR _SelectedMeasureValue = SWITCH(
+			        _SelectedMeasure, 
+			        "'_measures'[rate_discards]", "Discard Rate",   
+			        "'_measures'[count_discards]", "Discard Count"
+			    ) 
+			VAR _SelectedDateValue = SWITCH(
+			        _SelectedDate, 
+			        "'_date_table'[Year]", "Year", 
+			        "'_date_table'[Month Year]", "Month"
+			    )
+			RETURN 
+			    _SelectedMeasureValue & " by " & _SelectedDateValue
+			```
+		lineageTag: b5d687f2-77c3-4bec-b6dc-8efe983c75f1
+
+	partition _measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

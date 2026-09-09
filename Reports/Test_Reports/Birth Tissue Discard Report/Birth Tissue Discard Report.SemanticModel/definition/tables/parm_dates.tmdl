@@ -1,0 +1,48 @@
+table parm_dates
+	lineageTag: 032f27d1-802c-440e-ad70-5d342b5015c5
+
+	column parm_dates
+		lineageTag: de8740e5-2f45-4a71-b011-0aa38dccd264
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'parm_dates Order'
+
+		relatedColumnDetails
+			groupByColumn: 'parm_dates Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'parm_dates Fields'
+		isHidden
+		lineageTag: 005e6fb3-bdb1-4674-a695-5cf3e188edba
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'parm_dates Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'parm_dates Order'
+		isHidden
+		formatString: 0
+		lineageTag: e52d7703-cbf1-4860-b516-05f49fd20fca
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition parm_dates = calculated
+		mode: import
+		source =
+				{
+				    ("Year", NAMEOF('_date_table'[Year]), 0),
+				    ("Month", NAMEOF('_date_table'[Month Year]), 1)
+				}
+
+	annotation PBI_Id = 4446b6dfe3ca4af2bb6042764b35915f
+

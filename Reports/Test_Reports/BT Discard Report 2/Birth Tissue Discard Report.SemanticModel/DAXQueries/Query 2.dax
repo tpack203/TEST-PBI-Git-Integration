@@ -1,0 +1,26 @@
+DEFINE
+	MEASURE '_measures'[count_discards] = CALCULATE(
+			COUNTROWS(_data),
+			USERELATIONSHIP(
+				_date_table[Date],
+				_data[DISCARD-DATE]
+			),
+			_data[DON1MH-ACCEPT] = "N"
+		)
+	MEASURE '_measures'[test] = IF(
+			SELECTEDVALUE(_site_disconnected[p-site]) = "Total",
+			CALCULATE(
+				[count_discards],
+				ALL(_data[p-site])
+			),
+			CALCULATE(
+				[count_discards],
+				SELECTEDVALUE(_site_disconnected[p-site]) = _data[p-site]
+			)
+		)
+
+EVALUATE
+	SUMMARIZECOLUMNS(
+		"count_discards", [count_discards],
+		"test", [test]
+	)

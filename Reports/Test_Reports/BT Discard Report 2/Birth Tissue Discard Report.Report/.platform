@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Birth Tissue Discard Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "43eca7ea-159f-4ac9-8555-bea33e7f4237"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 362,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "_data",
+          "nodeLineageTag": "43a389e9-6f4a-4385-96dd-507aab8c9ae9",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 347,
+            "y": 23
+          },
+          "nodeIndex": "_date_table",
+          "nodeLineageTag": "fc35bc50-7151-494a-9057-ce17cd37d6d7",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 616,
+            "y": 60
+          },
+          "nodeIndex": "_measures",
+          "nodeLineageTag": "9aba97a4-51b2-4727-b387-302d86aa30d9",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 900,
+            "y": 60
+          },
+          "nodeIndex": "Rate vs Perct. of Total",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1184,
+            "y": 60
+          },
+          "nodeIndex": "parm_dates",
+          "nodeLineageTag": "032f27d1-802c-440e-ad70-5d342b5015c5",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 1468,
+            "y": 60
+          },
+          "nodeIndex": "parm_matrix_measures",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 351.4000244140625,
+            "y": 334
+          },
+          "nodeIndex": "period",
+          "nodeLineageTag": "ddd71843-db6b-45ea-be4f-fff181c37042",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
