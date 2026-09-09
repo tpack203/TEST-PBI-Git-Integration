@@ -1,0 +1,104 @@
+table _date_table
+	lineageTag: fc35bc50-7151-494a-9057-ce17cd37d6d7
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 88a388ee-7747-4afe-9783-9ecd668cffd8
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 912ed0ef-74ee-4b5d-9030-23ee5207aff7
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: e2c52d6c-c4e8-4750-9e8b-93cd5b1ad4d3
+		summarizeBy: none
+		sourceColumn: Month Name
+		sortByColumn: 'Month Number'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a94cab3-7dd4-454c-a894-545de2007464
+		summarizeBy: sum
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Sort'
+		dataType: int64
+		formatString: 0
+		lineageTag: d36c6d2c-7645-4ba1-85a9-3c72c55cbf08
+		summarizeBy: sum
+		sourceColumn: Year Month Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		dataType: string
+		lineageTag: 8a0fa184-7ddd-4cba-b5fc-dc498af25064
+		summarizeBy: none
+		sourceColumn: Month Year
+		sortByColumn: 'Year Month Sort'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _date_table = m
+		mode: import
+		source = ```
+				let
+				    // Start with the incoming data
+				    Source = _data,
+				
+				    // Extract the minimum date from the specified column, ignoring nulls
+				    MinDateRaw = List.Min(
+				                    Table.SelectColumns(Source, {"DON1MH-DATED-ADD"})
+				                    [#"DON1MH-DATED-ADD"]
+				                 ),
+				    min_date = if MinDateRaw = null then null else Date.From(MinDateRaw),
+				
+				    // Get today's date (date part only, based on local time)
+				    todays_date = Date.From(DateTime.FixedLocalNow()),
+				
+				    // Number of days
+				    _duration = Duration.Days(todays_date - min_date),
+				
+				    // Get a list of dates in range 
+				    _dates = List.Dates(min_date, _duration, #duration(1,0,0,0)),
+				
+				    // Convert the list to a date table
+				    _date_table = Table.FromList(_dates, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Renamed Columns - Date" = Table.RenameColumns(_date_table,{{"Column1", "Date"}}),
+				    #"Changed Type - Date" = Table.TransformColumnTypes(#"Renamed Columns - Date",{{"Date", type date}}),
+				    #"Inserted Year" = Table.AddColumn(#"Changed Type - Date", "Year", each Date.Year([Date]), Int64.Type),
+				    #"Inserted Month Name" = Table.AddColumn(#"Inserted Year", "Month Name", each Date.MonthName([Date]), type text),
+				    #"Inserted Month" = Table.AddColumn(#"Inserted Month Name", "Month Number", each Date.Month([Date]), Int64.Type),
+				    #"Added Custom" = Table.AddColumn(#"Inserted Month", "Year Month Sort", each [Year] * 100 + [Month Number]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Year Month Sort", Int64.Type}}),
+				    #"Added Custom Column" = Table.AddColumn(#"Changed Type", "Month Year", each Text.Combine({Date.ToText([Date], "MMM"), "-", Date.ToText([Date], "yy")}), type text)
+				in
+				    #"Added Custom Column"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

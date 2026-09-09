@@ -1,0 +1,48 @@
+table 'Rate vs Perct. of Total'
+	lineageTag: 1cd25176-078e-483a-83e0-c6943a4242c1
+
+	column 'Rate vs Perct. of Total r'
+		lineageTag: 3b94f7c1-7d44-4e49-821b-2ab7144f6217
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Rate vs Perct. of Total r Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Rate vs Perct. of Total r Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rate vs Perct. of Total r Fields'
+		isHidden
+		lineageTag: cd39424f-1dac-4b07-8ba1-a5e8fb599700
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Rate vs Perct. of Total r Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rate vs Perct. of Total r Order'
+		isHidden
+		formatString: 0
+		lineageTag: d0044863-cc65-4fcd-bc00-6cc6f7c65752
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Rate vs Perct. of Total' = calculated
+		mode: import
+		source =
+				{
+				    ("Percentage of Total Discards", NAMEOF('_measures'[percent_of_total_discards]), 1),
+				    ("Discard Rate", NAMEOF('_measures'[rate_discards]), 0)
+				}
+
+	annotation PBI_Id = b47080dfcb2440199d32f783e30b51d0
+

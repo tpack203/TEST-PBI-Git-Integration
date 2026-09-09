@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Birth Tissue Discard Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "adb813fd-1a6e-a854-4060-82f080d54991"
+  }
+}

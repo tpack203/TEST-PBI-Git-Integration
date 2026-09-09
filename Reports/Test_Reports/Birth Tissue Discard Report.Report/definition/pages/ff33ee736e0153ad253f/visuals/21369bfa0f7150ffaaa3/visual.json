@@ -1,0 +1,262 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "21369bfa0f7150ffaaa3",
+  "position": {
+    "x": 56.776429809358753,
+    "y": 264.54072790294629,
+    "z": 0,
+    "height": 202.77296360485266,
+    "width": 773.65684575389946,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_data"
+                    }
+                  },
+                  "Property": "DON1MH-NUMBER"
+                }
+              },
+              "queryRef": "_data.DON1MH-NUMBER",
+              "nativeQueryRef": "Donor Number",
+              "displayName": "Donor Number"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_data"
+                    }
+                  },
+                  "Property": "ReactiveResults"
+                }
+              },
+              "queryRef": "_data.ReactiveResults",
+              "nativeQueryRef": "Reactive Results",
+              "displayName": "Reactive Results"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_data"
+                    }
+                  },
+                  "Property": "comments"
+                }
+              },
+              "queryRef": "_data.comments",
+              "nativeQueryRef": "Comments",
+              "displayName": "Comments"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_data"
+                    }
+                  },
+                  "Property": "DiscardReason"
+                }
+              },
+              "queryRef": "_data.DiscardReason",
+              "nativeQueryRef": "Discard Reason",
+              "displayName": "Discard Reason"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "_data"
+                        }
+                      },
+                      "Property": "DON1MH-NUMBER"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "CountNonNull(_data.DON1MH-NUMBER)",
+              "nativeQueryRef": "Count of DON1MH-NUMBER"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "111.53067435118174D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_data.ReactiveResults"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104.62268339109863D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_data.DON1MH-NUMBER"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "138.17508491752386D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_data.comments"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "161.2173135144666D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "_data.DiscardReason"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6a4aa335b48dc8b94058",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_data"
+              }
+            },
+            "Property": "ReactiveResults"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "45c34098dc9c97565109",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_data"
+              }
+            },
+            "Property": "comments"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b6be5bba7a517e199da5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_data"
+              }
+            },
+            "Property": "DiscardReason"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "3f42c1dffa5c3b87b0fe",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_data"
+              }
+            },
+            "Property": "DON1MH-NUMBER"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9159f4840fc2efbb584e",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_data"
+                  }
+                },
+                "Property": "DON1MH-NUMBER"
+              }
+            },
+            "Function": 5
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

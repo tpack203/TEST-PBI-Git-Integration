@@ -1,0 +1,90 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "5dad2e9e8d056b4b34f1",
+  "displayName": "Page 1",
+  "displayOption": "FitToPage",
+  "height": 1000,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "edb6aeadb82286b1b14c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_date_table"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "RelativeDate",
+        "howCreated": "User"
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "53e4c55b999cd25413d6",
+      "target": "1e68865af19bf62c7b93",
+      "type": "DataFilter"
+    },
+    {
+      "source": "e4523c94e95c3e751de5",
+      "target": "1e68865af19bf62c7b93",
+      "type": "DataFilter"
+    },
+    {
+      "source": "afdb4bc946c94d6a3366",
+      "target": "1e68865af19bf62c7b93",
+      "type": "DataFilter"
+    },
+    {
+      "source": "d8b2c07ea55d4682a5ef",
+      "target": "1e68865af19bf62c7b93",
+      "type": "DataFilter"
+    },
+    {
+      "source": "f6fd762d4be3090c68a8",
+      "target": "d8b2c07ea55d4682a5ef",
+      "type": "NoFilter"
+    },
+    {
+      "source": "aae44d05b514713bc7bc",
+      "target": "d8b2c07ea55d4682a5ef",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ab9bc707cab06a45ccb1",
+      "target": "d8b2c07ea55d4682a5ef",
+      "type": "DataFilter"
+    }
+  ]
+}
